@@ -41,4 +41,10 @@ async function run(page,mobile){
  await page.reload();
  await page.waitForTimeout(500);
  assert.ok(!((await page.locator('.fitness-volume strong').innerText()).startsWith('0 ')),'Training persists after reload');
+ await page.locator('#settings-open').click();await page.locator('#settings-dialog').waitFor({state:'visible'});await page.locator('#settings-save').click();
+ await page.locator('[data-target="routines"]').click();await page.locator('#view-routines').waitFor({state:'visible'});
+ await page.locator('.fitness-backup summary').click();
+ const backup=page.waitForEvent('download');await page.locator('#export-data').click();assert.ok((await backup).suggestedFilename().endsWith('.json'));
+ await page.locator('[data-target="history"]').click();await page.locator('#view-history').waitFor({state:'visible'});
+ await page.locator('[data-target="today"]').click();
 }

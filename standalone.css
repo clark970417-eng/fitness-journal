@@ -1,0 +1,10 @@
+/* Standalone navigation replaces the surrounding Pocket shell. */
+#settings-open{display:grid!important}
+.tabbar{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.prototype-shell{padding-bottom:90px!important}
+.view{display:none!important;padding-bottom:90px!important}
+.view.is-active,#view-routines.is-active,#view-history.is-active,#view-trends.is-active{display:block!important}
+.video-entry-band,#free-workout{display:block!important}
+#view-history .calendar-panel{display:block!important}
+[hidden]{display:none!important}
+#view-today>.topbar .topbar-actions{display:flex;margin-left:auto}

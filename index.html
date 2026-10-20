@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="./tracker.css" />
 
 
-<link rel="stylesheet" href="./fitness-ui.css"><link rel="stylesheet" href="./dashboard.css"></head>
+<link rel="stylesheet" href="./fitness-ui.css"><link rel="stylesheet" href="./dashboard.css"><link rel="stylesheet" href="./standalone.css"></head>
 <body class="pocket-tool pocket-plugin">
   <p id="swipe-page-hint" class="swipe-page-hint" aria-live="polite">今天 · 向左滑看紀錄</p>
-  <main class="prototype-shell" aria-label="訓練手記訓練手記">
+  <main class="prototype-shell" aria-label="健身紀錄器">
     <section id="view-today" class="view is-active" data-view="today">
       <header class="topbar">
         <div>
@@ -166,6 +166,7 @@
     <nav class="tabbar" aria-label="健身紀錄導覽">
       <button class="is-active" type="button" data-target="today"><svg aria-hidden="true"><use href="./module-icons.svg#module-1" /></svg><span>今天</span></button>
 
+      <button type="button" data-target="routines"><svg aria-hidden="true"><use href="./module-icons.svg#module-4" /></svg><span>課表</span></button>
       <button type="button" data-target="history"><svg aria-hidden="true" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:1.8"><rect x="4" y="5" width="16" height="16" rx="3"/><path d="M8 3v4m8-4v4M4 11h16m-11 4h6m-6 3h4"/></svg><span>紀錄</span></button>
 
     </nav>
@@ -275,7 +276,7 @@
   <dialog id="settings-dialog" class="sheet-dialog settings-dialog" aria-labelledby="settings-title">
     <header class="sheet-header"><div><p class="eyebrow">個人化</p><h2 id="settings-title">設定</h2></div><form method="dialog"><button class="icon-button" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form></header><button class="icon-button" id="theme-toggle" type="button" aria-label="切換深色外觀" title="切換外觀"><svg aria-hidden="true"><use href="./module-icons.svg#BulbOutlined" /></svg></button>
     <section class="settings-group"><h3>訓練偏好</h3><label class="form-field">訓練目標<select id="settings-goal"><option>力量</option><option>增肌</option><option>習慣</option></select></label><label class="form-field">每週目標<input id="settings-frequency" type="number" min="1" max="7" /></label><fieldset class="option-fieldset"><legend>重量單位</legend><div class="segmented-options settings-units"><button type="button" data-settings-unit="kg">公斤 kg</button><button type="button" data-settings-unit="lb">磅 lb</button></div></fieldset></section>
-    <section class="settings-group"><h3>提醒</h3><label class="toggle-row"><span><strong>訓練提醒</strong><small>依照每週排程提醒</small></span><input id="training-reminders" type="checkbox" /></label><label class="toggle-row"><span><strong>休息計時完成</strong><small>休息時間結束時提示</small></span><input id="rest-reminders" type="checkbox" checked /></label></section>
+    <section class="settings-group" hidden><h3>提醒</h3><label class="toggle-row"><span><strong>訓練提醒</strong><small>依照每週排程提醒</small></span><input id="training-reminders" type="checkbox" /></label><label class="toggle-row"><span><strong>休息計時完成</strong><small>休息時間結束時提示</small></span><input id="rest-reminders" type="checkbox" checked /></label></section>
     <p id="settings-error" class="form-error" role="alert"></p><button class="primary-button" id="settings-save" type="button">保存設定</button>
   </dialog>
 

@@ -184,10 +184,9 @@ function buildHistoryEntry() {
 }
 
 function showView(name) {
-  if (['history','trends'].includes(name)) name='today';
   views.forEach(view => view.classList.toggle('is-active', view.dataset.view === name));
   tabs.forEach(tab => tab.classList.toggle('is-active', tab.dataset.target === name));
-  document.querySelector('.tabbar').hidden = true;
+  document.querySelector('.tabbar').hidden = name === 'workout';
   const hint = document.getElementById('swipe-page-hint');
   hint.hidden = true;
   hint.textContent = name === 'history' ? '紀錄 · 向右滑回今天' : '今天 · 向左滑看紀錄';
