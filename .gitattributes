@@ -1,0 +1,3 @@
+vendor/** -whitespace
+demo-runtime.js -whitespace
+THIRD_PARTY_NOTICES.md -whitespace

@@ -1,0 +1,312 @@
+{
+  "venue": "竹北國民運動中心 3 樓體適能中心",
+  "address": "新竹縣竹北市莊敬南路 18 號",
+  "sourceUrl": "https://www.zbsports.com.tw/wp-content/uploads/2024/08/竹北健身房月季卡申辦契約書含附件.pdf",
+  "sourceKind": "official-contract-appendix",
+  "sourceDate": "2024-08",
+  "checkedAt": "2026-10-12",
+  "page": 9,
+  "note": "官方附件的歷史設備清單，非現場即時盤點。坐姿划船胸墊型式依使用者回報；動態示意並非現場機型的精確複製。重複設備列保留原表編號，動作不重複建立。",
+  "rows": [
+    {
+      "row": 1,
+      "equipment": "坐姿胸部推舉機",
+      "exercise": "機械胸推",
+      "kind": "training"
+    },
+    {
+      "row": 2,
+      "equipment": "肩部推舉機",
+      "exercise": "肩推機",
+      "kind": "training"
+    },
+    {
+      "row": 3,
+      "equipment": "高拉滑輪機",
+      "exercise": "滑輪下拉",
+      "kind": "training"
+    },
+    {
+      "row": 4,
+      "equipment": "坐姿划船訓練機",
+      "exercise": "胸靠式划船機",
+      "kind": "training"
+    },
+    {
+      "row": 5,
+      "equipment": "坐姿蝴蝶機",
+      "exercise": "蝴蝶機夾胸",
+      "kind": "training"
+    },
+    {
+      "row": 6,
+      "equipment": "腿部伸張機",
+      "exercise": "腿屈伸",
+      "kind": "training"
+    },
+    {
+      "row": 7,
+      "equipment": "坐姿腿部彎曲機",
+      "exercise": "坐姿腿彎舉",
+      "kind": "training"
+    },
+    {
+      "row": 8,
+      "equipment": "臀部旋轉訓練機",
+      "exercise": "站姿髖外展機",
+      "kind": "training"
+    },
+    {
+      "row": 9,
+      "equipment": "腹部前屈機",
+      "exercise": "捲腹機",
+      "kind": "training"
+    },
+    {
+      "row": 10,
+      "equipment": "伸展機",
+      "exercise": "伸展機坐姿伸展",
+      "kind": "training"
+    },
+    {
+      "row": 11,
+      "equipment": "史密斯訓練機",
+      "exercise": "史密斯深蹲",
+      "kind": "training"
+    },
+    {
+      "row": 12,
+      "equipment": "包膠鐵片組 ZIVA",
+      "exercise": "槓鈴臥推",
+      "kind": "accessory"
+    },
+    {
+      "row": 13,
+      "equipment": "舉重彎曲槓 10KG",
+      "exercise": "EZ 槓彎舉",
+      "kind": "accessory"
+    },
+    {
+      "row": 14,
+      "equipment": "可調式啞鈴訓練椅",
+      "exercise": "啞鈴臥推",
+      "kind": "training"
+    },
+    {
+      "row": 15,
+      "equipment": "腹部/啞鈴訓練椅",
+      "exercise": "捲腹",
+      "kind": "training"
+    },
+    {
+      "row": 16,
+      "equipment": "腹部/啞鈴訓練椅",
+      "exercise": "捲腹",
+      "kind": "training"
+    },
+    {
+      "row": 17,
+      "equipment": "平條訓練椅",
+      "exercise": "啞鈴臥推",
+      "kind": "training"
+    },
+    {
+      "row": 18,
+      "equipment": "平條訓練椅",
+      "exercise": "啞鈴臥推",
+      "kind": "training"
+    },
+    {
+      "row": 19,
+      "equipment": "坐姿腿部彎曲機",
+      "exercise": "坐姿腿彎舉",
+      "kind": "training"
+    },
+    {
+      "row": 20,
+      "equipment": "二頭肌彎舉架",
+      "exercise": "EZ 槓牧師彎舉",
+      "kind": "training"
+    },
+    {
+      "row": 21,
+      "equipment": "包膠啞鈴(含放置架)",
+      "exercise": "啞鈴彎舉",
+      "kind": "accessory"
+    },
+    {
+      "row": 22,
+      "equipment": "紅色包膠啞鈴(含放置架)",
+      "exercise": "啞鈴彎舉",
+      "kind": "accessory"
+    },
+    {
+      "row": 23,
+      "equipment": "專業用電腦跑步機",
+      "exercise": "跑步機快走",
+      "kind": "training"
+    },
+    {
+      "row": 24,
+      "equipment": "專業用交叉訓練機",
+      "exercise": "橢圓交叉訓練機",
+      "kind": "training"
+    },
+    {
+      "row": 25,
+      "equipment": "專業用靠背式腳踏車",
+      "exercise": "靠背式健身車",
+      "kind": "training"
+    },
+    {
+      "row": 26,
+      "equipment": "專業用划船機",
+      "exercise": "有氧划船機",
+      "kind": "training"
+    },
+    {
+      "row": 27,
+      "equipment": "專業用直立式腳踏車",
+      "exercise": "直立式健身車",
+      "kind": "training"
+    },
+    {
+      "row": 28,
+      "equipment": "斜45度健身車",
+      "exercise": "斜 45 度健身車",
+      "kind": "training"
+    },
+    {
+      "row": 29,
+      "equipment": "專業用樓梯機",
+      "exercise": "樓梯機",
+      "kind": "training"
+    },
+    {
+      "row": 30,
+      "equipment": "飛輪有氧健身車",
+      "exercise": "飛輪有氧健身車",
+      "kind": "training"
+    },
+    {
+      "row": 31,
+      "equipment": "坐姿胸部推舉機",
+      "exercise": "機械胸推",
+      "kind": "training"
+    },
+    {
+      "row": 32,
+      "equipment": "肩部推舉機",
+      "exercise": "肩推機",
+      "kind": "training"
+    },
+    {
+      "row": 33,
+      "equipment": "側肩推舉機",
+      "exercise": "側平舉機",
+      "kind": "training"
+    },
+    {
+      "row": 34,
+      "equipment": "二頭肌訓練機",
+      "exercise": "二頭彎舉機",
+      "kind": "training"
+    },
+    {
+      "row": 35,
+      "equipment": "三頭肌訓練機",
+      "exercise": "三頭伸展機",
+      "kind": "training"
+    },
+    {
+      "row": 36,
+      "equipment": "大腿內收訓練機",
+      "exercise": "髖內收機",
+      "kind": "training"
+    },
+    {
+      "row": 37,
+      "equipment": "大腿外展推蹬訓練機",
+      "exercise": "髖外展機",
+      "kind": "training"
+    },
+    {
+      "row": 38,
+      "equipment": "單雙槓訓練機",
+      "exercise": "雙槓撐體",
+      "kind": "training"
+    },
+    {
+      "row": 39,
+      "equipment": "高拉滑輪機",
+      "exercise": "滑輪下拉",
+      "kind": "training"
+    },
+    {
+      "row": 40,
+      "equipment": "全肢體多功能訓練機",
+      "exercise": "滑輪夾胸",
+      "kind": "training"
+    },
+    {
+      "row": 41,
+      "equipment": "45度背部伸張架",
+      "exercise": "羅馬椅背伸展",
+      "kind": "training"
+    },
+    {
+      "row": 42,
+      "equipment": "可調式滑輪交叉訓練機",
+      "exercise": "滑輪夾胸",
+      "kind": "training"
+    },
+    {
+      "row": 43,
+      "equipment": "無敵多功能訓練站 MR47",
+      "exercise": "滑輪夾胸",
+      "kind": "training"
+    },
+    {
+      "row": 44,
+      "equipment": "平臥推架",
+      "exercise": "槓鈴臥推",
+      "kind": "training"
+    },
+    {
+      "row": 45,
+      "equipment": "上斜推舉架",
+      "exercise": "上斜槓鈴臥推",
+      "kind": "training"
+    },
+    {
+      "row": 46,
+      "equipment": "平臥推舉架",
+      "exercise": "槓鈴臥推",
+      "kind": "training"
+    },
+    {
+      "row": 47,
+      "equipment": "坐姿划船訓練機",
+      "exercise": "胸靠式划船機",
+      "kind": "training"
+    },
+    {
+      "row": 48,
+      "equipment": "包膠槓片組 (2.5~25KG)",
+      "exercise": "槓鈴臥推",
+      "kind": "accessory"
+    },
+    {
+      "row": 49,
+      "equipment": "奧林匹克標準槓把",
+      "exercise": "槓鈴臥推",
+      "kind": "accessory"
+    },
+    {
+      "row": 50,
+      "equipment": "槓片放置架",
+      "exercise": null,
+      "kind": "accessory"
+    }
+  ]
+}

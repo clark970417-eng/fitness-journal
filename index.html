@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#F8FAF9" />
+  <title>健身紀錄 · 訓練手記</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./tracker.css" />
+
+
+<link rel="stylesheet" href="./fitness-ui.css"><link rel="stylesheet" href="./dashboard.css"></head>
+<body class="pocket-tool pocket-plugin">
+  <p id="swipe-page-hint" class="swipe-page-hint" aria-live="polite">今天 · 向左滑看紀錄</p>
+  <main class="prototype-shell" aria-label="訓練手記訓練手記">
+    <section id="view-today" class="view is-active" data-view="today">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="fitness-today-date"></p>
+          <h1>健身紀錄</h1>
+        </div>
+        <div class="topbar-actions"><button class="icon-button" id="settings-open" type="button" aria-label="開啟設定" title="設定"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" style="fill:none;stroke:currentColor;stroke-width:1.8"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="var(--surface)"/><circle cx="15" cy="17" r="3" fill="var(--surface)"/></svg></button></div>
+      </header>
+
+      <div class="content">
+        <section id="fitness-dashboard" aria-label="訓練量與進步"></section>
+        <section class="today-plan" aria-label="當天動作">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">當天動作</p>
+              <h2 id="today-plan-title">下肢力量</h2>
+            </div>
+            <span id="today-plan-detail"></span>
+          </div>
+          <ol id="today-exercises" class="exercise-list"></ol>
+          <div class="today-action-pair"><button class="primary-button" id="start-workout" type="button">上傳今日紀錄</button>
+          <button class="secondary-button" id="browse-exercises" type="button">瀏覽動作庫</button></div>
+        </section>
+
+        <section class="video-entry-band" aria-label="影片紀錄">
+          <div><h2>用影片記錄訓練</h2><p>匯入影片，整理動作、重量與次數。</p></div>
+          <button class="secondary-button" type="button" data-import-video><svg aria-hidden="true"><use href="./module-icons.svg#PlusOutlined" /></svg>匯入影片</button>
+          <div id="video-journal-list" class="video-journal-list"></div>
+        </section>
+        <button class="quiet-button" type="button" id="free-workout">開始自由訓練</button>
+      </div>
+    </section>
+
+    <section id="view-workout" class="view workout-view" data-view="workout">
+      <header class="topbar workout-topbar">
+        <button class="icon-button" id="close-workout" type="button" aria-label="返回今天">
+          <svg aria-hidden="true"><use href="./module-icons.svg#ArrowLeftOutlined" /></svg>
+        </button>
+        <div>
+          <p class="eyebrow">進行中 · <span id="workout-elapsed">00:00</span></p>
+          <h1>下肢力量</h1>
+        </div>
+        <button class="text-button" id="finish-workout" type="button">完成</button>
+      </header>
+
+      <div class="rhythm-rail" aria-label="訓練進度 3 / 10 組">
+        <span class="done"></span><span class="done"></span><span class="done"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="session-metrics"><span id="workout-set-total">0 組</span><strong id="workout-volume-total">0 kg</strong></div>
+
+      <div class="content workout-content">
+        <details class="workout-tools"><summary>切換訓練動作</summary><div id="exercise-switcher" class="exercise-switcher" aria-label="切換訓練動作"></div></details>
+        <section class="active-exercise">
+          <details class="workout-demo"><summary>查看動作示範</summary><div class="active-demo-row"><div id="active-exercise-demo"></div><div><span class="muscle-key"><i></i><span id="active-muscle"></span></span><button class="quiet-button" id="demo-toggle" type="button" aria-pressed="false">暫停示範</button></div></div></details>
+          <div class="section-heading">
+            <div><p id="exercise-position" class="eyebrow">動作 1 / 3</p><h2 id="active-exercise-name">槓鈴深蹲</h2></div>
+          </div>
+          <p id="last-performance" class="last-performance">上次：80 kg × 5 · RPE 8</p>
+
+          <div id="set-table" class="set-table" role="table" aria-label="槓鈴深蹲組數">
+            <div class="set-row set-head" role="row"><span>組</span><span>重量</span><span>次數</span><span>完成</span></div>
+          </div>
+          <button class="primary-button" id="next-exercise" type="button">下一個動作</button>
+          <details class="workout-tools"><summary>更多訓練工具</summary>
+            <button class="secondary-button" id="replace-exercise" type="button">替換動作</button>
+            <button class="secondary-button" id="add-set" type="button">新增一組</button>
+            <button class="secondary-button" id="add-workout-exercise" type="button">加入動作</button>
+            <button class="quiet-button" type="button" data-import-video>匯入影片</button>
+          </details>
+        </section>
+
+        <section class="rest-timer" aria-live="polite">
+          <div><span>休息</span><strong id="rest-time">01:18</strong></div>
+          <div class="timer-actions"><button type="button" data-time="-15">−15</button><button type="button" id="timer-toggle">暫停</button><button type="button" data-time="15">+15</button></div>
+        </section>
+      </div>
+    </section>
+
+    <section id="view-routines" class="view" data-view="routines">
+      <header class="topbar"><div><p class="eyebrow">訓練安排</p><h1>課表</h1></div><button class="icon-button" id="new-routine" type="button" aria-label="建立課表"><svg aria-hidden="true"><use href="./module-icons.svg#PlusOutlined" /></svg></button></header>
+      <div class="content">
+        <section class="weekly-plan" aria-labelledby="weekly-plan-title">
+          <div class="section-heading"><div><p class="eyebrow">本週安排</p><h2 id="weekly-plan-title">訓練節奏</h2></div><span id="weekly-plan-count">3 天</span></div>
+          <div id="weekly-plan-days" class="weekly-plan-days"></div>
+          <p class="weekly-plan-hint">點選日期可切換休息或指定課表。</p>
+        </section>
+        <section class="routine-featured">
+          <p class="eyebrow">目前計畫 · 每週 3 天</p>
+          <h2>力量基礎</h2>
+          <p>循序增加主要動作重量，保留足夠恢復時間。</p>
+          <div class="routine-progress"><span style="width:67%"></span></div>
+          <small>第 2 / 3 次 · 下肢力量</small>
+        </section>
+        <section class="routine-list" aria-labelledby="routine-list-title">
+          <div class="section-heading"><h2 id="routine-list-title">我的課表</h2><span id="routine-count">3 份</span></div>
+          <div id="routine-items"></div>
+        </section>
+
+        <details class="fitness-backup"><summary>資料備份與匯入</summary><section class="data-tools">
+          <div><strong>訓練資料</strong><small>紀錄可匯出備份；原影片僅存在此裝置。</small></div>
+          <div><button id="export-data" type="button">匯出 JSON</button><button id="export-csv" type="button">匯出 CSV</button><button id="import-data" type="button">匯入</button></div>
+        </section></details>
+      </div>
+    </section>
+
+    <section id="view-history" class="view" data-view="history">
+      <header class="topbar"><div><p class="eyebrow">9 月</p><h1>紀錄</h1></div><button class="icon-button" id="history-search-toggle" aria-label="搜尋紀錄"><svg aria-hidden="true"><use href="./module-icons.svg#SearchOutlined" /></svg></button></header>
+      <div class="content">
+        <section id="history-search-panel" class="history-search-panel" hidden>
+          <label class="search-field"><svg aria-hidden="true"><use href="./module-icons.svg#SearchOutlined" /></svg><input id="history-search" type="search" placeholder="搜尋課表或動作" autocomplete="off" /></label>
+          <div class="filter-chips history-filters"><button class="selected" type="button" data-history-filter="all">全部</button><button type="button" data-history-filter="pr">有 PR</button><button type="button" data-history-filter="lower">下肢</button><button type="button" data-history-filter="upper">上肢</button></div>
+        </section>
+        <section class="calendar-panel" aria-labelledby="calendar-title">
+          <div class="section-heading"><div><p class="eyebrow">訓練日曆</p><h2 id="calendar-title">2026 年 9 月</h2></div><span id="calendar-summary">0 天</span></div>
+          <div class="calendar-weekdays" aria-hidden="true"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+          <div id="training-calendar" class="training-calendar" aria-label="本月訓練日曆"></div>
+        </section>
+        <details class="combined-stats"><summary>進步統計與肌群分布</summary><p id="trend-period-label" class="eyebrow"></p>
+        <div class="stats-controls"><div class="stats-segments" role="group" aria-label="統計期間"><button type="button" data-period="week" aria-pressed="true">週</button><button type="button" data-period="month" aria-pressed="false">月</button><button type="button" data-period="year" aria-pressed="false">年</button></div><button id="stats-prev" class="icon-button" type="button" aria-label="上一個期間"><svg aria-hidden="true"><use href="./module-icons.svg#ArrowLeftOutlined" /></svg></button><button id="stats-next" class="icon-button" type="button" aria-label="下一個期間"><svg aria-hidden="true"><use href="./module-icons.svg#RightOutlined" /></svg></button></div>
+        <section class="trend-lead"><p id="trend-message">你維持得很穩定</p><strong id="trend-count">0</strong><span id="trend-count-detail">次訓練</span></section>
+        <section class="chart-section">
+          <div class="section-heading"><div><p class="eyebrow">完成容量</p><h2 id="trend-volume">0 kg</h2></div><span class="positive" id="trend-change">—</span></div>
+          <div id="volume-chart" class="bar-chart" aria-label="四週訓練量長條圖"></div>
+        </section>
+        <section class="exercise-progress" aria-labelledby="exercise-progress-title">
+          <div class="section-heading"><div><p class="eyebrow">動作進步</p><h2 id="exercise-progress-title">估算 1RM</h2></div><select id="progress-exercise" aria-label="選擇動作"></select></div>
+          <div class="progress-metric"><strong id="progress-value">—</strong><span>kg · 目前最佳</span><b id="progress-delta">—</b></div>
+          <svg id="progress-chart" class="progress-chart" viewBox="0 0 320 124" role="img" aria-label="動作估算 1RM 趨勢"></svg>
+          <div id="progress-labels" class="progress-labels"></div>
+        </section>
+        <section class="body-progress" aria-labelledby="body-progress-title">
+          <div class="section-heading"><div><p class="eyebrow">身體數據</p><h2 id="body-progress-title">身體進度</h2></div><button id="add-body-metric" class="compact-command" type="button">新增</button></div>
+          <div class="body-metric-grid"><div><span>目前體重</span><strong id="current-weight">—</strong><small>kg</small></div><div><span>體脂</span><strong id="current-bodyfat">—</strong><small>%</small></div><div><span>30 天變化</span><strong id="weight-change">—</strong><small>kg</small></div></div>
+          <div id="body-history" class="body-history"></div>
+        </section>
+        <section class="goal-progress" aria-labelledby="goal-progress-title">
+          <div class="section-heading"><div><p class="eyebrow">目前目標</p><h2 id="goal-progress-title">每週訓練 3 次</h2></div><span id="goal-percent">0%</span></div>
+          <div class="goal-track"><span id="goal-fill"></span></div>
+          <p id="goal-copy">完成本週第一次訓練後，進度會顯示在這裡。</p>
+        </section>
+        <section class="muscle-section"><div class="section-heading"><h2>訓練分布</h2><span id="distribution-total">0 組</span></div><div class="distribution" id="muscle-distribution"></div></section>
+        <section class="companion-note"><span class="companion-avatar" aria-hidden="true">C</span><p id="trend-guidance">完成一次訓練後，訓練手記會根據訓練量與 RPE 給你建議。</p></section>
+</details>
+        <section class="history-section">
+          <div class="section-heading"><h2>最近訓練</h2><span id="history-count">本月 0 次</span></div>
+          <div id="history-items"></div>
+        </section>
+      </div>
+    </section>
+
+    <nav class="tabbar" aria-label="健身紀錄導覽">
+      <button class="is-active" type="button" data-target="today"><svg aria-hidden="true"><use href="./module-icons.svg#module-1" /></svg><span>今天</span></button>
+
+      <button type="button" data-target="history"><svg aria-hidden="true" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:1.8"><rect x="4" y="5" width="16" height="16" rx="3"/><path d="M8 3v4m8-4v4M4 11h16m-11 4h6m-6 3h4"/></svg><span>紀錄</span></button>
+
+    </nav>
+  </main>
+
+  <dialog id="today-exercise-editor" class="number-dialog" aria-labelledby="today-edit-title">
+<form method="dialog"><button class="icon-button close-dialog" aria-label="關閉">×</button></form>
+<h2 id="today-edit-title">編輯動作</h2>
+<div class="today-edit-settings"><label>器材<select id="today-edit-equipment"></select></label><label>組數<input id="today-edit-count" type="number" min="1" max="30" step="1"></label></div>
+<div class="today-edit-set today-edit-head"><span>組</span><span>重量</span><span>次數</span><span>完成</span></div><div id="today-edit-sets"></div>
+<div class="today-action-pair"><button type="button" class="secondary-button" id="today-edit-delete">刪除動作</button><button type="button" class="primary-button" id="today-edit-save">儲存修改</button></div>
+</dialog>
+<dialog id="summary-dialog" class="summary-dialog">
+    <form method="dialog"><button class="icon-button close-dialog" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form>
+    <p class="eyebrow">訓練完成</p><h2>下肢力量</h2>
+    <div class="summary-stats"><div><strong>48</strong><span>分鐘</span></div><div><strong>10</strong><span>完成組數</span></div><div><strong>1</strong><span>個人紀錄</span></div></div>
+    <fieldset><legend>今天感覺如何？</legend><div class="feeling-options"><button type="button">有點累</button><button class="selected" type="button">剛剛好</button><button type="button">很有力</button></div></fieldset>
+    <label class="note-field">留給下次的備註<textarea placeholder="例如：右膝稍微緊，深蹲先維持重量"></textarea></label>
+    <button class="primary-button" id="save-summary" type="button">保存訓練</button>
+  </dialog>
+
+  <dialog id="exercise-dialog" class="sheet-dialog" aria-labelledby="exercise-dialog-title">
+    <header class="sheet-header"><div><p class="eyebrow">動作庫</p><h2 id="exercise-dialog-title">選擇動作</h2></div><form method="dialog"><button class="icon-button" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form></header>
+    <div class="library-layout"><aside class="library-sidebar" aria-label="搜尋與篩選"><label class="search-field"><svg aria-hidden="true"><use href="./module-icons.svg#SearchOutlined" /></svg><input id="exercise-search" aria-label="搜尋動作或肌群" type="search" placeholder="搜尋動作" autocomplete="off" /></label><label class="library-venue-filter"><input id="zhubei-filter" type="checkbox" />竹北國民運動中心器材</label><p class="library-source">依 <a href="https://www.zbsports.com.tw/wp-content/uploads/2024/08/竹北健身房月季卡申辦契約書含附件.pdf" target="_blank" rel="noopener">官方 2024 年設備清單</a>整理，現場器材可能異動。</p><p class="library-filter-label">肌群</p><div class="filter-chips muscle-filters" aria-label="肌群篩選"><button class="selected" type="button" data-filter="全部">全部</button><button type="button" data-filter="胸">胸</button><button type="button" data-filter="背">背</button><button type="button" data-filter="腿">腿</button><button type="button" data-filter="肩">肩</button><button type="button" data-filter="手臂">手臂</button><button type="button" data-filter="核心">核心</button><button type="button" data-filter="有氧">有氧</button><button type="button" data-filter="伸展">伸展</button></div><p class="library-filter-label">器材</p><div class="equipment-filters" aria-label="器材篩選"><button class="selected" type="button" data-equipment="全部">全部</button><button type="button" data-equipment="槓鈴">槓鈴</button><button type="button" data-equipment="啞鈴">啞鈴</button><button type="button" data-equipment="滑輪">滑輪</button><button type="button" data-equipment="機械">機械</button><button type="button" data-equipment="徒手">徒手</button></div><button class="secondary-button sheet-footer-action" id="custom-exercise" type="button">新增自訂動作</button></aside><div class="library-main" aria-label="動作列表"><p id="exercise-result-count" class="library-count" role="status"></p><div id="exercise-results" class="exercise-results"></div></div></div>
+  </dialog>
+
+  <dialog id="number-dialog" class="number-dialog" aria-labelledby="number-dialog-title">
+    <form method="dialog"><button class="icon-button close-dialog" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form>
+    <p class="eyebrow">調整這一組</p><h2 id="number-dialog-title">重量</h2>
+    <div class="stepper"><button type="button" id="number-minus" aria-label="減少">−</button><output id="number-output">80</output><button type="button" id="number-plus" aria-label="增加">＋</button></div>
+    <label class="form-field">手動輸入<input id="number-direct" type="number" inputmode="decimal" min="0" step="any" required /></label>
+    <div id="quick-values" class="quick-values"></div>
+    <button class="primary-button" id="number-save" type="button">套用</button>
+  </dialog>
+
+  <dialog id="exercise-preview-dialog" class="number-dialog" aria-labelledby="exercise-preview-title">
+    <form method="dialog"><button class="icon-button close-dialog" aria-label="關閉示範"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form>
+    <p class="eyebrow">動作示範</p><h2 id="exercise-preview-title"></h2>
+    <div id="exercise-preview-demo"></div><button id="exercise-demo-toggle" class="quiet-button" type="button" aria-pressed="false">暫停示範</button><p id="exercise-preview-muscle" class="muscle-key"></p>
+    <p class="last-performance">動態人圖為動作示意；實際器材調整請依機身說明。</p><p id="exercise-preview-history" class="last-performance"></p>
+    <label id="exercise-duration-field" class="form-field" hidden>已完成時間（分鐘）<input id="exercise-duration" type="number" min="0.1" max="1440" step="0.1" inputmode="decimal" value="10" /></label><p id="exercise-duration-error" role="alert"></p>
+    <button id="exercise-preview-add" class="primary-button" type="button">加入本次訓練</button>
+  </dialog>
+
+  <dialog id="history-dialog" class="sheet-dialog history-dialog" aria-labelledby="history-dialog-title">
+    <header class="sheet-header"><div><p class="eyebrow">9 月 22 日 · 已完成</p><h2 id="history-dialog-title">上肢推</h2></div><form method="dialog"><button class="icon-button" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form></header>
+    <div class="summary-stats"><div><strong>52</strong><span>分鐘</span></div><div><strong>14</strong><span>完成組數</span></div><div><strong>2</strong><span>個人紀錄</span></div></div>
+    <div class="history-detail-list"><div><span><strong>槓鈴臥推</strong><small>4 組 · 最佳 62.5 kg × 6</small></span><b>PR</b></div></div>
+    <button class="secondary-button danger-button history-delete" id="history-delete" type="button">刪除此筆訓練</button>
+  </dialog>
+
+  <dialog id="set-options-dialog" class="number-dialog" aria-labelledby="set-options-title">
+    <form method="dialog"><button class="icon-button close-dialog" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form>
+    <p class="eyebrow">組別設定</p><h2 id="set-options-title">第 1 組</h2>
+    <fieldset class="option-fieldset"><legend>組別類型</legend><div class="type-options"><button type="button" data-type="正式">正式</button><button type="button" data-type="熱身">熱身</button><button type="button" data-type="遞減">遞減</button><button type="button" data-type="力竭">力竭</button></div></fieldset>
+    <label class="range-field">RPE <output id="rpe-output">8</output><input id="rpe-input" type="range" min="5" max="10" step="0.5" value="8" /></label>
+    <button class="primary-button" id="set-options-save" type="button">套用設定</button>
+  </dialog>
+
+  <dialog id="routine-dialog" class="sheet-dialog routine-dialog" aria-labelledby="routine-dialog-title">
+    <header class="sheet-header"><div><p class="eyebrow">課表編輯器</p><h2 id="routine-dialog-title">建立課表</h2></div><form method="dialog"><button class="icon-button" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form></header>
+    <label class="form-field">課表名稱<input id="routine-name" type="text" maxlength="24" placeholder="例如：上肢力量" /></label>
+    <label class="form-field">預估分鐘<input id="routine-minutes" type="number" min="10" max="180" step="5" value="45" /></label>
+    <fieldset class="option-fieldset"><legend>包含動作</legend><div id="routine-exercises" class="routine-exercise-options"></div></fieldset>
+    <p id="routine-error" class="form-error" role="alert"></p>
+    <div class="dialog-actions"><button class="primary-button" id="routine-save" type="button">保存課表</button><button class="secondary-button danger-button" id="routine-delete" type="button">刪除課表</button></div>
+  </dialog>
+
+  <dialog id="custom-exercise-dialog" class="number-dialog" aria-labelledby="custom-exercise-title">
+    <form method="dialog"><button class="icon-button close-dialog" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form>
+    <p class="eyebrow">動作庫</p><h2 id="custom-exercise-title">自訂動作</h2>
+    <label class="form-field">動作名稱<input id="custom-exercise-name" type="text" maxlength="30" placeholder="例如：地雷管划船" /></label>
+    <label class="form-field">主要肌群<select id="custom-exercise-group"><option>腿</option><option>胸</option><option>背</option><option>肩</option><option>手臂</option><option>核心</option></select></label>
+    <p id="custom-exercise-error" class="form-error" role="alert"></p>
+    <button class="primary-button" id="custom-exercise-save" type="button">加入動作庫</button>
+  </dialog>
+
+  <dialog id="import-dialog" class="number-dialog import-dialog" aria-labelledby="import-dialog-title">
+    <form method="dialog"><button class="icon-button close-dialog" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form>
+    <p class="eyebrow">資料攜帶</p><h2 id="import-dialog-title">匯入訓練資料</h2>
+    <label class="note-field">貼上 JSON 備份或 CSV<textarea id="import-content" placeholder="JSON，或 date,workout,exercise,set,weight,reps,rpe,type"></textarea></label>
+    <p id="import-error" class="form-error" role="alert"></p>
+    <button class="primary-button" id="import-save" type="button">驗證並匯入</button>
+  </dialog>
+
+  <dialog id="body-metric-dialog" class="number-dialog" aria-labelledby="body-metric-dialog-title">
+    <form method="dialog"><button class="icon-button close-dialog" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form>
+    <p class="eyebrow">身體進度</p><h2 id="body-metric-dialog-title">新增身體數據</h2>
+    <label class="form-field"><span id="body-weight-label">體重（kg）</span><input id="body-weight" type="number" min="20" max="700" step="0.1" inputmode="decimal" /></label>
+    <label class="form-field">體脂（選填）<input id="body-fat" type="number" min="2" max="70" step="0.1" inputmode="decimal" /></label>
+    <label class="form-field">腰圍（選填，cm）<input id="body-waist" type="number" min="30" max="250" step="0.1" inputmode="decimal" /></label>
+    <p id="body-metric-error" class="form-error" role="alert"></p>
+    <button class="primary-button" id="body-metric-save" type="button">保存數據</button>
+  </dialog>
+
+  <dialog id="onboarding-dialog" class="onboarding-dialog" aria-labelledby="onboarding-title">
+
+    <div class="onboarding-mark" aria-hidden="true">C</div>
+    <p class="eyebrow">FITNESS JOURNAL</p><h2 id="onboarding-title">先設定你的訓練方向</h2>
+    <p class="onboarding-copy">這些設定會用來安排每週目標與重量建議，之後都能修改。</p>
+    <fieldset class="option-fieldset"><legend>目前最重要的目標</legend><div class="goal-options"><button class="selected" type="button" data-goal="力量">增加力量</button><button type="button" data-goal="增肌">增加肌肉</button><button type="button" data-goal="習慣">建立習慣</button></div></fieldset>
+    <label class="range-field">每週訓練 <output id="onboarding-frequency-output">3 天</output><input id="onboarding-frequency" type="range" min="1" max="6" step="1" value="3" /></label>
+    <fieldset class="option-fieldset"><legend>重量單位</legend><div class="segmented-options"><button class="selected" type="button" data-unit="kg">公斤 kg</button><button type="button" data-unit="lb">磅 lb</button></div></fieldset>
+    <button class="primary-button" id="onboarding-save" type="button">開始使用</button>
+  </dialog>
+
+  <dialog id="settings-dialog" class="sheet-dialog settings-dialog" aria-labelledby="settings-title">
+    <header class="sheet-header"><div><p class="eyebrow">個人化</p><h2 id="settings-title">設定</h2></div><form method="dialog"><button class="icon-button" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form></header><button class="icon-button" id="theme-toggle" type="button" aria-label="切換深色外觀" title="切換外觀"><svg aria-hidden="true"><use href="./module-icons.svg#BulbOutlined" /></svg></button>
+    <section class="settings-group"><h3>訓練偏好</h3><label class="form-field">訓練目標<select id="settings-goal"><option>力量</option><option>增肌</option><option>習慣</option></select></label><label class="form-field">每週目標<input id="settings-frequency" type="number" min="1" max="7" /></label><fieldset class="option-fieldset"><legend>重量單位</legend><div class="segmented-options settings-units"><button type="button" data-settings-unit="kg">公斤 kg</button><button type="button" data-settings-unit="lb">磅 lb</button></div></fieldset></section>
+    <section class="settings-group"><h3>提醒</h3><label class="toggle-row"><span><strong>訓練提醒</strong><small>依照每週排程提醒</small></span><input id="training-reminders" type="checkbox" /></label><label class="toggle-row"><span><strong>休息計時完成</strong><small>休息時間結束時提示</small></span><input id="rest-reminders" type="checkbox" checked /></label></section>
+    <p id="settings-error" class="form-error" role="alert"></p><button class="primary-button" id="settings-save" type="button">保存設定</button>
+  </dialog>
+
+  <dialog id="checkin-dialog" class="number-dialog checkin-dialog" aria-labelledby="checkin-title">
+    <form method="dialog"><button class="icon-button close-dialog" aria-label="關閉"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></form>
+    <p class="eyebrow">每日狀態</p><h2 id="checkin-title">今天身體感覺如何？</h2>
+    <label class="range-field">睡眠品質 <output id="sleep-output">4 / 5</output><input id="sleep-input" type="range" min="1" max="5" step="1" value="4" /></label>
+    <label class="range-field">肌肉痠痛 <output id="soreness-output">2 / 5</output><input id="soreness-input" type="range" min="1" max="5" step="1" value="2" /></label>
+    <label class="range-field">精神狀態 <output id="energy-output">4 / 5</output><input id="energy-input" type="range" min="1" max="5" step="1" value="4" /></label>
+    <fieldset class="option-fieldset"><legend>是否有疼痛？</legend><div class="segmented-options pain-options"><button class="selected" type="button" data-pain="false">沒有</button><button type="button" data-pain="true">有疼痛</button></div></fieldset>
+    <div class="coach-preview"><span>預估準備度</span><strong id="checkin-preview-score">80</strong><small id="checkin-preview-label">適合正常訓練</small></div>
+    <button class="primary-button" id="checkin-save" type="button">更新教練建議</button>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <input id="training-video-input" type="file" accept="video/*,.mov,.mp4,.webm" hidden />
+  <dialog id="video-dialog" class="sheet-dialog video-dialog" aria-labelledby="video-dialog-title">
+    <header class="sheet-header"><div><p class="eyebrow">影片訓練紀錄</p><h2 id="video-dialog-title">影片紀錄</h2></div><button id="video-dialog-close" class="icon-button" type="button" aria-label="關閉影片"><svg aria-hidden="true"><use href="./module-icons.svg#CloseOutlined" /></svg></button></header>
+    <video id="training-video-player" controls playsinline preload="metadata"></video>
+    <div class="video-file-meta"><strong id="training-video-name"></strong><span id="training-video-duration"></span></div>
+    <p class="video-privacy">原影片只保存在此裝置。請播放影片後手動新增並確認訓練組數。</p>
+    <div class="video-analysis-actions"><button hidden id="analyze-training-video" class="primary-button" type="button">分析影片</button><button id="cancel-training-analysis" class="secondary-button" type="button" hidden>停止分析</button></div>
+    <progress id="training-analysis-progress" max="100" value="0" hidden></progress>
+    <p id="training-analysis-status" class="video-analysis-status" role="status" aria-live="polite"></p>
+    <a id="video-login-link" href="#" hidden>僅本機保存</a>
+    <form id="video-review-form">
+      <div class="section-heading"><h3>確認訓練草稿</h3><button id="add-video-set" class="text-button" type="button">新增一組</button></div>
+      <label class="form-field">訓練日期<input id="video-training-date" type="date" required /></label>
+      <div id="video-review-sets"></div>
+      <div class="video-review-total"><span>預計容量</span><strong id="video-review-volume">0 kg</strong></div>
+      <p id="video-review-error" class="form-error" role="alert"></p>
+      <button id="save-video-training" class="primary-button" type="submit">確認並保存訓練</button>
+    </form>
+    <button id="delete-training-video" class="quiet-button danger-button" type="button">移除此裝置的影片</button>
+  </dialog>
+
+
+
+  <script src="./training-core.js"></script>
+  <script src="./demo-runtime.js"></script>
+  <script src="./storage.js"></script>
+  <script src="./video-journal.js"></script>
+  <script src="./app.js"></script><script src="./dashboard.js"></script>
+</body>
+</html>
